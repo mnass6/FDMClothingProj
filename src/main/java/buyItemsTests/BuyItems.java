@@ -61,7 +61,7 @@ public class BuyItems {
 		
 		//Step 2 Add a T-Shirt to the cart
 		actions.moveToElement(TShirts.hoverItem(driver)).perform();
-		TShirts.selectItem(driver).click();
+		TShirts.selectItem(driver,1).click();
 		//Assert added to check message "Product successfully added to your shopping cart"
 		Thread.sleep(2000); //Allows time for pop up to appear
 		Assert.assertEquals(DataFile.tShirtPopUpHeading, PopUp.tShirtPopUpHeading(driver));

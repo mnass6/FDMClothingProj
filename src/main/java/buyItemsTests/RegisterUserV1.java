@@ -52,24 +52,28 @@ public class RegisterUserV1
 		AuthenticationPage.emailField(driver).sendKeys(createduser);
 		//The email address is shown in the Email Address  field
 		Assert.assertEquals(DataFile.registeredEmail, AuthenticationPage.emailField(driver).getAttribute("value"));
+		System.out.println("I am here 2");
 	
 		//Step 3 Click the Create An Account button
 		AuthenticationPage.createAccountButton(driver).click();
 		Thread.sleep(5000); //Should use an explicit wait here
 		//The user is directed to the Create An Account Page
 		Assert.assertEquals(DataFile.registrationPageHeading, RegisterPage.heading(driver).getText());
-	
+		System.out.println("I am here 3");
+		
 		//Step 4 Select a radio button for Title
 		Thread.sleep(5000); //Should use an explicit wait here
 		RegisterPage.mrTickbox(driver).click();
 		//The radio button is highlighted
 		Thread.sleep(5000); //Should use an explicit wait here
 		Assert.assertTrue(RegisterPage.mrTickbox(driver).isSelected());
+		System.out.println("I am here 4");
 
 		//Step 5 Enter a first name into the First Name field
 		RegisterPage.firstNamePersonalInfoField(driver).sendKeys(DataFile.firstName);
 		//The first name appears in the First Name field
 		Assert.assertEquals(DataFile.firstName, RegisterPage.firstNamePersonalInfoField(driver).getAttribute("value"));
+		System.out.println("I am here 5");
 		
 		//Step 6 Enter a last name into the Last Name field
 		RegisterPage.lastNamePersonalInfoField(driver).sendKeys(DataFile.lastName);
@@ -77,6 +81,7 @@ public class RegisterUserV1
 		Assert.assertEquals(DataFile.lastName, RegisterPage.lastNamePersonalInfoField(driver).getAttribute("value"));
 		//Step 6a The email address should be pre-populated with what was entered previously
 		Assert.assertEquals(DataFile.registeredEmail, RegisterPage.emailAddressField(driver).getAttribute("value"));
+		System.out.println("I am here 6");
 		
 		//Step 7 Enter a valid password
 		RegisterPage.passwordField(driver).sendKeys(DataFile.registeredPassword);
@@ -86,6 +91,7 @@ public class RegisterUserV1
 		Assert.assertEquals(DataFile.firstName,RegisterPage.firstNameYourAddressField(driver).getAttribute("value"));
 		//Step 7c Check Last Name
 		Assert.assertEquals(DataFile.lastName, RegisterPage.lastNameYourAddressField(driver).getAttribute("value"));
+		System.out.println("I am here 7");
 		
 		//Step 8 Enter a valid address
 		RegisterPage.addressField(driver).sendKeys(DataFile.address);
@@ -144,17 +150,32 @@ public class RegisterUserV1
 		Actions actions	= new Actions(driver);
 		
 		//Step 1 Click T-Shirts link
-		LoggedInHomePage.tShirts(driver);
-		Thread.sleep(15000);
-		Assert.assertEquals(DataFile.tShirtPageHeading, TShirts.heading(driver));
+		LoggedInHomePage.tShirts(driver).click();
+		Thread.sleep(5000);
+		Assert.assertEquals(DataFile.tShirtPageHeading, TShirts.heading(driver).getText());
+		System.out.println("I am here A");
 		
 		
 		//Step 2 Add a T-Shirt to the cart
+	/*	Thread.sleep(5000);
 		actions.moveToElement(TShirts.hoverItem(driver)).perform();
-		TShirts.selectItem(driver).click();
+		System.out.println("I am here B");*/
+		Thread.sleep(5000);
+		TShirts.selectItem(driver,1).click();
+		Thread.sleep(15000);
+		//A pop up will be displayed
+		TShirts.clickAddToCartOnPopUp(driver).click();
+		//TShirts.clickProductName(driver);
+		System.out.println("I am here C");
+		
 		//Assert added to check message "Product successfully added to your shopping cart"
-		Thread.sleep(2000); //Allows time for pop up to appear
+		
+		Thread.sleep(10000); //Allows time for pop up to appear
+		
+	
 		Assert.assertEquals(DataFile.tShirtPopUpHeading, PopUp.tShirtPopUpHeading(driver));
+		System.out.println("I am here D");
+		
 	}
 	
 	
@@ -162,6 +183,6 @@ public class RegisterUserV1
 	public void tearDown()
 	{ 			
 		// Typical functionality is to close the browser after you have finished the test
-		driver.quit();
+		//driver.quit();
 	}
 }

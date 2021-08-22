@@ -21,6 +21,7 @@ public class DataFile
 	public static String orderSummaryHeading = "ORDER SUMMARY";
 	public static String orderConfirmationHeading = "ORDER CONFIRMATION";
 	public static String orderHistoryHeading = "ORDER HISTORY";
+	public static String closePopUp = "Close";
 		
 	static LocalDate localDate = LocalDate.now().minusDays(1);
     	static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
